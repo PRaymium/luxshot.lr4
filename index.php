@@ -12,12 +12,12 @@ $items = $connection->query($query);
 $items = array_reverse($items->fetchAll());
 ?>
 
-<?php require "templates/head.php" ?>
+<?php require "templates/head.html" ?>
 
 <body>
-    <?php require "templates/preloader.php" ?>
-    <?php require "templates/forms.php" ?>
-    <?php require "templates/header.php" ?>
+    <?php require "templates/preloader.html" ?>
+    <?php require "templates/forms.html" ?>
+    <?php require "templates/header.html" ?>
     <main class="main">
         <div class="main-wrapper">
             <div class="upload-block">
@@ -41,9 +41,9 @@ $items = array_reverse($items->fetchAll());
             <button id="ajax_loader_button" class="ajax-loader-button" data-page="1" data-page-max="<?= ceil($last_id / $items_size) ?>">Загрузить ещё</button>
         </div>
     </main>
-    <?php require "templates/footer.php" ?>
+    <?php require "templates/footer.html" ?>
     <script src="js/preloader.js"></script>
-    <script src="js/script.js"></script>
+    <script src="js/forms.js"></script>
     <script src="js/more_items.js"></script>
 </body>
 

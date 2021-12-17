@@ -1,6 +1,6 @@
 <?php require "db.php" ?>
 
-<?php require "templates/head.php" ?>
+<?php require "templates/head.html" ?>
 <?php
 $id = $_GET['id'];
 
@@ -27,8 +27,8 @@ $items->execute([$id]);
 </head>
 
 <body>
-    <?php require "templates/forms.php" ?>
-    <?php require "templates/header.php" ?>
+    <?php require "templates/forms.html" ?>
+    <?php require "templates/header.html" ?>
     <main class="main">
         <div class="main-wrapper">
             <?php foreach ($items as $item) : ?>
@@ -45,8 +45,8 @@ $items->execute([$id]);
             <?php endforeach; ?>
         </div>
     </main>
-    <?php require "templates/footer.php" ?>
-    <script src="js/script.js"></script>
+    <?php require "templates/footer.html" ?>
+    <script src="js/forms.js"></script>
 </body>
 
 </html>

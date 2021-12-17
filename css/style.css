@@ -298,6 +298,10 @@ body::-webkit-scrollbar-thumb
     border: 1px dotted #3A3C4C;
 }
 
+.form-input.invalid {
+    border: 1px solid #ED2545;
+}
+
 .auth-form-list{
     list-style-type: none;
     padding: 0px;
