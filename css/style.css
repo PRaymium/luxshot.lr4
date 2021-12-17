@@ -381,6 +381,19 @@ body::-webkit-scrollbar-thumb
     color: #ED2545;
 }
 
+.auth-form-error{
+    width: 100%;
+    font-size: 0.5em;
+    background-color: #68111f;
+    color: #fff;
+    border-radius: 5px;
+    text-align: center;
+    box-sizing: border-box;
+    line-height: 200%;
+    overflow-wrap: break-word;
+    white-space: pre;
+}
+
 
 .ajax-loader-button{
     width: 100%;

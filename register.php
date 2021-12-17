@@ -58,9 +58,10 @@ if (!empty($errors)) {
 
 $password = password_hash($password, PASSWORD_DEFAULT);
 
-$email_check = $connection->prepare("SELECT * FROM users WHERE email=$email");
+$email_check = $connection->prepare("SELECT * FROM users WHERE email='$email'");
 $email_check->execute([$email]);
 $email_check = $email_check->fetchAll();
+
 if (count($email_check) != 0){
     echo json_encode(['email_check' => false]);
     die();
@@ -69,5 +70,6 @@ if (count($email_check) != 0){
 $status = $connection->prepare("INSERT INTO users (email, password, name, phone_number) VALUES (?, ?, ?, ?)");
 $status->execute([$email, $password, $name, $phone]);
 
-echo json_encode(['success' => true]);
+echo json_encode(['email_check' => true, 'success' => true]);
+// echo json_encode(['success' => true]);
 ?>

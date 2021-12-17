@@ -41,10 +41,10 @@ async function registrationDataSend(e) {
 	let regFormPasswordInput = document.getElementById('signupForm-password-input');
 	let regFormPasswordRepeatInput = document.getElementById('signupForm-passwordRepeat-input');
 
-	if (!(regFormPasswordRepeatInput.value == regFormPasswordInput.value)) {
-		alert("Пароли не совпадают");
-		return;
-	}
+	// if (!(regFormPasswordRepeatInput.value == regFormPasswordInput.value)) {
+	// 	alert("Пароли не совпадают");
+	// 	return;
+	// }
 
 	if (regFormNameInput.classList.contains("invalid")) {
 		regFormNameInput.classList.remove("invalid");
@@ -62,20 +62,9 @@ async function registrationDataSend(e) {
 		regFormPasswordRepeatInput.classList.remove("invalid");
 	}
 
+	let regFormError = document.getElementById('signupForm-error');
+
 	let registerForm = new FormData(this);
-
-	// let response = await fetch('https://httpbin.org/post', {
-	// 	method: 'POST',
-	// 	body: formData
-	// });
-
-	// if (response.ok) {
-	// 	let result = await response.json();
-	// 	console.log(result.form);
-	// }
-	// else {
-	// 	alert('Ошибка HTTP: ' + response.status);
-	// }
 
 	fetch('register.php', {
 		method: 'POST',
@@ -85,33 +74,77 @@ async function registrationDataSend(e) {
 		.then(response => response.json())
 		.then((result) => {
 			console.log(result);
+			br = document.createElement('br');
 			if (result.errors) {
 				//вывод ошибок валидации на форму
+				regFormError.textContent = "";
 				result.errors.forEach(function callback(currentValue) {
 					if (currentValue == "name") {
 						regFormNameInput.classList.add("invalid");
+						if (regFormError.textContent == "") {
+							regFormError.textContent += "Некорректное имя";
+						}
+						else{
+							regFormError.textContent += "\nНекорректное имя";
+						}
 					}
 					if (currentValue == "email") {
 						regFormEmailInput.classList.add("invalid");
+						if (regFormError.textContent == "") {
+							regFormError.textContent += "Некорректный email";
+						}
+						else{
+							regFormError.textContent += "\nНекорректный email";
+						}
 					}
 					if (currentValue == "phone") {
 						regFormPhoneInput.classList.add("invalid");
+						if (regFormError.textContent == "") {
+							regFormError.textContent += "Некорректный номер телефона";
+						}
+						else{
+							regFormError.textContent += "\nНекорректный номер телефона";
+						}
 					}
 					if (currentValue == "password") {
 						regFormPasswordInput.classList.add("invalid");
+						if (regFormError.textContent == "") {
+							regFormError.textContent += "Некорректный пароль";
+						}
+						else{
+							regFormError.textContent += "\nНекорректный пароль";
+						}
 					}
 					if (currentValue == "passwordRepeat") {
-						regFormpasswordRepeatInput.classList.add("invalid");
+						regFormPasswordRepeatInput.classList.add("invalid");
+						if (regFormError.textContent == "") {
+							regFormError.textContent += "Пароли не совпадают";
+						}
+						else{
+							regFormError.textContent += "\nПароли не совпадают";
+						}
+					}
+					if (currentValue == "checkbox") {
+						if (regFormError.textContent == "") {
+							regFormError.textContent += "Необходимо принять соглашение на обработку персональных данных";
+						}
+						else{
+							regFormError.textContent += "\nНеобходимо принять соглашение на обработку персональных данных";
+						}
 					}
 				})
-			} else if (!result.email_check[0]) {
-				console.log("Пользователь уже существует");
+			} else if (!result.email_check) {
+				regFormError.textContent = "";
+				regFormError.textContent += "Пользователь с таким email уже существует";
+				regFormEmailInput.classList.add("invalid");
+				console.log("Пользователь с таким email уже существует");
 			}
 			else{
 				//успешная регистрация, обновляем страницу
+				alert("Успешная регистрация");
 			}
 		})
-		// .catch(error => console.log(error));
+		.catch(error => console.log(error));
 }
 
 // loginForm.addEventListener("submit", authorizationDataSend);
