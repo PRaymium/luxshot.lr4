@@ -1,5 +1,5 @@
 <?php require "db.php" ?>
-
+<?php session_start(); ?>
 <?php require "templates/head.html" ?>
 <?php
 $id = $_GET['id'];
@@ -28,7 +28,7 @@ $items->execute([$id]);
 
 <body>
     <?php require "templates/forms.html" ?>
-    <?php require "templates/header.html" ?>
+    <?php require "templates/header.php" ?>
     <main class="main">
         <div class="main-wrapper">
             <?php foreach ($items as $item) : ?>
@@ -47,6 +47,7 @@ $items->execute([$id]);
     </main>
     <?php require "templates/footer.html" ?>
     <script src="js/forms.js"></script>
+    <script src="js/nav.js"></script>
 </body>
 
 </html>

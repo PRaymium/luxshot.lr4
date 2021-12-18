@@ -74,7 +74,6 @@ async function registrationDataSend(e) {
 		.then(response => response.json())
 		.then((result) => {
 			console.log(result);
-			br = document.createElement('br');
 			if (result.errors) {
 				//вывод ошибок валидации на форму
 				regFormError.textContent = "";
@@ -84,7 +83,7 @@ async function registrationDataSend(e) {
 						if (regFormError.textContent == "") {
 							regFormError.textContent += "Некорректное имя";
 						}
-						else{
+						else {
 							regFormError.textContent += "\nНекорректное имя";
 						}
 					}
@@ -93,7 +92,7 @@ async function registrationDataSend(e) {
 						if (regFormError.textContent == "") {
 							regFormError.textContent += "Некорректный email";
 						}
-						else{
+						else {
 							regFormError.textContent += "\nНекорректный email";
 						}
 					}
@@ -102,7 +101,7 @@ async function registrationDataSend(e) {
 						if (regFormError.textContent == "") {
 							regFormError.textContent += "Некорректный номер телефона";
 						}
-						else{
+						else {
 							regFormError.textContent += "\nНекорректный номер телефона";
 						}
 					}
@@ -111,7 +110,7 @@ async function registrationDataSend(e) {
 						if (regFormError.textContent == "") {
 							regFormError.textContent += "Некорректный пароль";
 						}
-						else{
+						else {
 							regFormError.textContent += "\nНекорректный пароль";
 						}
 					}
@@ -120,7 +119,7 @@ async function registrationDataSend(e) {
 						if (regFormError.textContent == "") {
 							regFormError.textContent += "Пароли не совпадают";
 						}
-						else{
+						else {
 							regFormError.textContent += "\nПароли не совпадают";
 						}
 					}
@@ -128,7 +127,7 @@ async function registrationDataSend(e) {
 						if (regFormError.textContent == "") {
 							regFormError.textContent += "Необходимо принять соглашение на обработку персональных данных";
 						}
-						else{
+						else {
 							regFormError.textContent += "\nНеобходимо принять соглашение на обработку персональных данных";
 						}
 					}
@@ -139,13 +138,71 @@ async function registrationDataSend(e) {
 				regFormEmailInput.classList.add("invalid");
 				console.log("Пользователь с таким email уже существует");
 			}
-			else{
+			else {
 				//успешная регистрация, обновляем страницу
-				alert("Успешная регистрация");
+				window.location.reload()
 			}
 		})
 		.catch(error => console.log(error));
 }
 
-// loginForm.addEventListener("submit", authorizationDataSend);
+
+
+async function authorizationDataSend(e) {
+	e.preventDefault();
+
+	let loginFormEmailInput = document.getElementById('loginForm-email-input');
+	let loginFormPasswordInput = document.getElementById('loginForm-password-input');
+
+	if (loginFormEmailInput.classList.contains("invalid")) {
+		loginFormEmailInput.classList.remove("invalid");
+	}
+	if (loginFormPasswordInput.classList.contains("invalid")) {
+		loginFormPasswordInput.classList.remove("invalid");
+	}
+
+	let loginFormError = document.getElementById('loginForm-error');
+
+	let loginForm = new FormData(this);
+
+	fetch('login.php', {
+		method: 'POST',
+		body: loginForm
+	}
+	)
+		.then(response => response.json())
+		.then((result) => {
+			console.log(result);
+			if (result.errors) {
+				//вывод ошибок валидации на форму
+				loginFormError.textContent = "";
+				result.errors.forEach(function callback(currentValue) {
+					if (currentValue == "email") {
+						loginFormEmailInput.classList.add("invalid");
+						if (loginFormError.textContent == "") {
+							loginFormError.textContent += "Пользователь с таким email не найден";
+						}
+						else {
+							loginFormError.textContent += "\nПользователь с таким email не найден";
+						}
+					}
+					if (currentValue == "password") {
+						loginFormPasswordInput.classList.add("invalid");
+						if (loginFormError.textContent == "") {
+							loginFormError.textContent += "Некорректный пароль";
+						}
+						else {
+							loginFormError.textContent += "\nНекорректный пароль";
+						}
+					}
+				})
+			} else {
+				//успешная авторизация, обновляем страницу
+				window.location.reload()
+			}
+		})
+		.catch(error => console.log(error));
+}
+
+loginForm.addEventListener("submit", authorizationDataSend);
 signupForm.addEventListener("submit", registrationDataSend);

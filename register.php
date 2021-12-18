@@ -4,7 +4,6 @@ header('Content-Type: application/json');
 require 'db.php';
 
 $errors = [];
-// array_push($errors, "ошибка");
 
 //логика проверки полей
 
@@ -58,7 +57,7 @@ if (!empty($errors)) {
 
 $password = password_hash($password, PASSWORD_DEFAULT);
 
-$email_check = $connection->prepare("SELECT * FROM users WHERE email='$email'");
+$email_check = $connection->prepare("SELECT * FROM users WHERE email=?");
 $email_check->execute([$email]);
 $email_check = $email_check->fetchAll();
 
@@ -70,6 +69,15 @@ if (count($email_check) != 0){
 $status = $connection->prepare("INSERT INTO users (email, password, name, phone_number) VALUES (?, ?, ?, ?)");
 $status->execute([$email, $password, $name, $phone]);
 
+$email_check = $connection->prepare("SELECT * FROM users WHERE email=?");
+$email_check->execute([$email]);
+$email_check = $email_check->fetchAll();
+
+session_start();
+$_SESSION['user'] = [
+    'user_id' => $email_check[0]['id'],
+    'name' => $email_check[0]['name'],
+];
+
 echo json_encode(['email_check' => true, 'success' => true]);
-// echo json_encode(['success' => true]);
 ?>

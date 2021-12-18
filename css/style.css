@@ -63,6 +63,7 @@ body::-webkit-scrollbar-thumb
     justify-content: space-between;
     align-items: center;
     margin: 0px 50px;
+    position: relative;
 }
 
 .logo-link{
@@ -72,6 +73,7 @@ body::-webkit-scrollbar-thumb
     align-items: center;
     padding: 25px 0px;
     cursor: pointer;
+    z-index: 3;
 }
 
 .logo-link:hover .logo-link_picture{
@@ -92,7 +94,7 @@ body::-webkit-scrollbar-thumb
     width: 100%;
 }
 
-.login-button{
+/* .login-button{
     color: #FFF;
     font-size: 2em;
     cursor: pointer;
@@ -105,7 +107,137 @@ body::-webkit-scrollbar-thumb
 
 .login-button:active{
     transform: translateY(2px);
+} */
+
+
+
+.nav-menu{
+    color: #FFF;
 }
+
+.nav-menu.hidden{
+    position: absolute;
+    top: -100vh;
+    left: 0;
+    background-color: #090B21;
+    width: 100%;
+    height: 100vh;
+    z-index: 2;
+    text-align: center;
+    transition: .4s ease-in-out;
+}
+
+.nav-menu.hidden.active{
+    top: 100%;
+}
+
+.nav-menu__title{
+    display: none;
+}
+
+.nav-menu__title.hidden{
+    display: block;
+    font-size: 2.5em;
+    color: #ED2545;
+}
+
+.nav-burger-menu{
+    color: #ED2545;
+    display: none;
+    cursor: pointer;
+    font-size: 2em;
+    z-index: 3;
+    width: 40px;
+    height: 40px;
+}
+
+.nav-burger-menu.hidden{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.burger-menu__line{
+    
+    width: 100%;
+    height: 3px;
+    background-color: #ED2545;
+    transition: .2s ease-in-out;
+    margin: 5px 0;
+}
+
+.burger-menu__line2{
+    transform: scale(1);
+}
+
+.burger-menu__line1.active{
+    transform: rotate(45deg);
+    transform-origin: top left;
+}
+
+.burger-menu__line2.active{
+    transform: scale(0);
+}
+
+.burger-menu__line3.active{
+    transform: rotate(-45deg);
+    transform-origin: bottom left;
+}
+
+.nav-burger-menu.active{
+    color: green;
+}
+
+.nav-menu__list{
+    color: #ED2545;
+    list-style: none;
+    font-size: 2em;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-menu__list.hidden{
+    margin-top: 3%;
+    width: 100%;
+}
+
+.nav-menu__list-li.hidden{
+    width: 90%;
+    padding: 1% 5%;
+    margin-bottom: 1%;
+}
+
+.nav-menu__list-item{
+    cursor: pointer;
+    text-decoration: none;
+    color: #FFF;
+    transition: .2s ease-in-out;
+}
+
+.nav-menu__list-item.hidden{
+    width: 90%;
+    padding: 1% 5%;
+    border-bottom: 1px solid #ED2545;
+    border-radius: 5%;
+}
+
+.nav-menu__list-item.hidden.welcome{
+    border-bottom: 1px solid transparent;
+}
+
+.nav-menu__list-item.hidden.welcome:hover{
+    color: #fff;
+}
+
+.nav-menu__list-item:visited{
+    color: #FFF;
+}
+
+.nav-menu__list-item:hover{
+    color: #ED2545;
+}
+
+
 
 .main-wrapper{
     margin: 50px;
@@ -428,40 +560,8 @@ body::-webkit-scrollbar-thumb
     }   
 }
 
-@media screen and (max-width: 670px){
-    body {
-        font-size: 12px;
-    }
 
-    .logo-link_picture {
-        width: 30px;
-    }
-
-    .screenshot{
-        width: 100%;
-        /* height: 0px; */
-        /* padding-bottom: calc(100%/16*9); */
-    }
-
-    .screenshot-img-block{
-        width: 100%;
-        max-height: 315px;
-        height: auto;
-        /* position: relative; */
-    }
-
-    .logo-link_text{
-        padding-left: 0px;
-    }
-
-    .ajax-loader-button{
-        margin: 5% 0px;
-        padding: 3% 0px;
-        border-radius: 0.3em;
-    }
-}
-
-@media screen and (max-width: 500px){
+@media screen and (max-width: 720px){
     body {
         font-size: 2.5vw;
     }  
@@ -476,6 +576,34 @@ body::-webkit-scrollbar-thumb
 
     .logo-link_picture {
         width: 3em;
+    }
+
+    .logo-link_text{
+        padding-left: 0px;
+    }
+
+    .nav-burger-menu{
+        width: 1.5em;
+        height: 1.5em;
+    }
+    
+    .burger-menu__line{
+        height: 3px;
+        margin: 12.5% 0;
+    }
+
+    .nav-menu__list.hidden{
+        margin-top: 5%;
+    }
+    
+    .nav-menu__list-li.hidden{
+        padding: 4% 5%;
+        margin-bottom: 4%;
+    }
+    
+    .nav-menu__list-item.hidden{
+        padding: 4% 5%;
+        border-radius: 5%;
     }
     
     .main-wrapper{
@@ -501,11 +629,13 @@ body::-webkit-scrollbar-thumb
     
     .screenshot{
         border-radius: 5vw;
+        width: 100%;
     }
 
     .screenshot-img-block{
         border-radius: 5vw;
-        height: 180px;
+        height: 200px;
+        width: 100%;
     }
 
     .screenshot-date{

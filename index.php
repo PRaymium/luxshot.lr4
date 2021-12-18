@@ -1,4 +1,5 @@
 <?php require "db.php" ?>
+<?php session_start(); ?>
 
 <?php
 $query = "SELECT id FROM screenshots";
@@ -17,7 +18,7 @@ $items = array_reverse($items->fetchAll());
 <body>
     <?php require "templates/preloader.html" ?>
     <?php require "templates/forms.html" ?>
-    <?php require "templates/header.html" ?>
+    <?php require "templates/header.php" ?>
     <main class="main">
         <div class="main-wrapper">
             <div class="upload-block">
@@ -45,6 +46,7 @@ $items = array_reverse($items->fetchAll());
     <script src="js/preloader.js"></script>
     <script src="js/forms.js"></script>
     <script src="js/more_items.js"></script>
+    <script src="js/nav.js"></script>
 </body>
 
 </html>
