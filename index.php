@@ -2,12 +2,21 @@
 <?php session_start(); ?>
 
 <?php
-$query = "SELECT id FROM screenshots";
-$ids = $connection->query($query);
-$ids = $ids->fetchAll();
-$last_id = end($ids)['id'];
+$query = "SELECT id FROM screenshots WHERE public='1'";
+
+$items_count = $connection->query($query);
+$items_count = $items_count->fetchAll();
+
+$items_count = count($items_count);
+echo($items_count);
 $items_size = 6;
-$offset = $last_id - $items_size;
+$offset = $items_count - $items_size;
+if ($offset < 0)
+{
+    $offset = 0;
+    $items_size = $items_count - $items_size;
+}
+
 $query = "SELECT * FROM screenshots WHERE public='1' LIMIT $items_size OFFSET $offset";
 $items = $connection->query($query);
 $items = array_reverse($items->fetchAll());
@@ -30,7 +39,7 @@ $items = array_reverse($items->fetchAll());
                 <div class="screenshots-block_title">Последние скриншоты</div>
                 <div class="screenshots">
                     <?php foreach ($items as $item) : ?>
-                        <a href="screenshot.php?id=<?= $item['id'] ?>" class="screenshot">
+                        <a href="screenshot.php?img=<?= $item['img'] ?>" class="screenshot">
                             <div class="screenshot-img-block">
                                 <img src="screenshots-image/<?= $item['img'] ?>" alt="" class="screenshot-img">
                             </div>
@@ -39,7 +48,7 @@ $items = array_reverse($items->fetchAll());
                     <?php endforeach; ?>
                 </div>
             </div>
-            <button id="ajax_loader_button" class="ajax-loader-button" data-page="1" data-page-max="<?= ceil($last_id / $items_size) ?>">Загрузить ещё</button>
+            <button id="ajax_loader_button" class="ajax-loader-button" data-page="1" data-page-max="<?= ceil($items_count / $items_size) ?>">Загрузить ещё</button>
         </div>
     </main>
     <?php require "templates/footer.html" ?>
