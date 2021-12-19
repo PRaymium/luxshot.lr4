@@ -115,7 +115,7 @@ body::-webkit-scrollbar-thumb
     color: #FFF;
 }
 
-.nav-menu.hidden{
+.nav-menu.hidden-menu{
     position: absolute;
     top: -100vh;
     left: 0;
@@ -127,7 +127,7 @@ body::-webkit-scrollbar-thumb
     transition: .4s ease-in-out;
 }
 
-.nav-menu.hidden.active{
+.nav-menu.hidden-menu.active{
     top: 100%;
 }
 
@@ -135,7 +135,7 @@ body::-webkit-scrollbar-thumb
     display: none;
 }
 
-.nav-menu__title.hidden{
+.nav-menu__title.hidden-menu{
     display: block;
     font-size: 2.5em;
     color: #ED2545;
@@ -151,7 +151,7 @@ body::-webkit-scrollbar-thumb
     height: 40px;
 }
 
-.nav-burger-menu.hidden{
+.nav-burger-menu.hidden-menu{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -196,12 +196,12 @@ body::-webkit-scrollbar-thumb
     padding: 0;
 }
 
-.nav-menu__list.hidden{
+.nav-menu__list.hidden-menu{
     margin-top: 3%;
     width: 100%;
 }
 
-.nav-menu__list-li.hidden{
+.nav-menu__list-li.hidden-menu{
     width: 90%;
     padding: 1% 5%;
     margin-bottom: 1%;
@@ -214,18 +214,18 @@ body::-webkit-scrollbar-thumb
     transition: .2s ease-in-out;
 }
 
-.nav-menu__list-item.hidden{
+.nav-menu__list-item.hidden-menu{
     width: 90%;
     padding: 1% 5%;
     border-bottom: 1px solid #ED2545;
     border-radius: 5%;
 }
 
-.nav-menu__list-item.hidden.welcome{
+.nav-menu__list-item.hidden-menu.welcome{
     border-bottom: 1px solid transparent;
 }
 
-.nav-menu__list-item.hidden.welcome:hover{
+.nav-menu__list-item.hidden-menu.welcome:hover{
     color: #fff;
 }
 
@@ -592,16 +592,16 @@ body::-webkit-scrollbar-thumb
         margin: 12.5% 0;
     }
 
-    .nav-menu__list.hidden{
+    .nav-menu__list.hidden-menu{
         margin-top: 5%;
     }
     
-    .nav-menu__list-li.hidden{
+    .nav-menu__list-li.hidden-menu{
         padding: 4% 5%;
         margin-bottom: 4%;
     }
     
-    .nav-menu__list-item.hidden{
+    .nav-menu__list-item.hidden-menu{
         padding: 4% 5%;
         border-radius: 5%;
     }
